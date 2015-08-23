@@ -5,6 +5,7 @@ var argv = require('minimist')(process.argv.slice(2), {
     port: 'p',
     dir: 'd',
     host: 'h',
+    css: 's',
     errorHandler: 'error-handler'
   },
   boolean: [ 'live', 'debug', 'errorHandler' ],

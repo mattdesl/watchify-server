@@ -52,22 +52,25 @@ Usage:
   watchify-server entry.js [options] -- [browserify]
 
 Options:
-  --port, -p          port to listen on
-  --host, -h          host to listen on
-  --dir, -d           directory for static content
-  --title             title of HTML index
-  --index             optional path to override index.html
+  --port, -p          port to listen on, default 9966
+  --host, -h          host to listen on, default localhost
+  --dir, -d           directory for static content, default process.cwd()
   --no-debug          turns off source maps
   --no-error-handler  turns off syntax error handling
+  --index             optional file path to override default index.html
+  --title             title of HTML index
+  --css, -s           optional style sheet href, relative to --dir
 ```
 
 Browserify options are passed after the `--` full stop.
+
+The `--title` and `--css` arguments are only applicable to the default `index.html` handler.
 
 ### API
 
 *Note:* The API does not set any default config on the browserify instance, so it is up to the developer to set `debug`, `packageCache`, and `cache`.
 
-##### `server = watchifyServer(browserify, opt, [cb])`
+#### `server = watchifyServer(browserify, opt, [cb])`
 
 Creates a new watchify server that wraps the specified `browserify` instance. Options:
 
@@ -76,7 +79,7 @@ Creates a new watchify server that wraps the specified `browserify` instance. Op
 
 Other options are passed to [watchify-middleware](https://www.npmjs.com/package/watchify-middleware) and [serves](https://www.npmjs.com/package/serves), but defaults `port` to 9966 and `errorHandler` to true.
 
-The returned server emits `'update'` events from `browserify-middleware`.
+The returned server emits `'update'` events from `watchify-middleware`.
 
 The callback takes the form `callback(err, ev)` with the following event parameters when the server starts listening:
 
@@ -88,11 +91,11 @@ The callback takes the form `callback(err, ev)` with the following event paramet
 }
 ```
 
-##### `server = watchifyServer.fromArgs(browserifyArgs, [opt], [cb])`
+#### `server = watchifyServer.fromArgs(browserifyArgs, [opt], [cb])`
 
-Creates a new watchify server from the given command-line browserify `args` array, with optional `opt` overrides and a callback.
+Creates a new watchify server from the given command-line browserify args array, with optional `opt` overrides and a callback.
 
-Since `opt` is optional here (entry is resolved by browserify arg parsing), this function can accept `cb` as the second parameter.
+The `entry` is resolved by browserify arg parsing, so `opt` is optional and `cb` can be passed as the second parameter.
 
 ## See Also
 

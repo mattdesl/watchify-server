@@ -20,7 +20,7 @@
     "garnish": "^2.3.0"
   },
   "scripts": {
-    "start": "./bin/cmd.js example/app.js --title woah --dir example/public -p 8080 | garnish"
+    "start": "./bin/cmd.js example/app.js --title woah --css main.css --dir example/public -p 8080 | garnish"
   },
   "keywords": [
     "watchify",
